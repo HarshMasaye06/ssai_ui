@@ -37,7 +37,7 @@ export default function Home() {
     setIsLoading(true);
 
     // Simulate API delay
-    await new Promise((resolve) => setTimeout(resolve, 5000));
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
     // Add AI's response
     setMessages((prev) => [
@@ -45,7 +45,7 @@ export default function Home() {
       {
         type: "answer",
         content:
-          "This is a sample response. The AI would process your query here.",
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet blanditiis repellat cupiditate maiores assumenda facilis porro praesentium. Neque praesentium perspiciatis ipsa maiores, ad fugit, exercitationem vitae possimus voluptatum id enim saepe nemo.",
         links: ["Related topic 1", "Related topic 2"],
       },
     ]);
@@ -91,13 +91,15 @@ export default function Home() {
                 {message.links && !isTyping && (
                   <div className="mt-4 flex flex-wrap gap-2">
                     {message.links.map((link, j) => (
-                      <button
+                      <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
                         key={j}
                         className="inline-flex items-center gap-1 text-sm bg-[#4ECDC4] text-[#2C363F] px-4 py-2 rounded-full border-[3px] border-[#2C363F] font-bold neubrutalism-shadow neubrutalism-button"
                       >
                         {link}
                         {/* <ArrowUpRight className="w-4 h-4" /> */}
-                      </button>
+                      </motion.button>
                     ))}
                   </div>
                 )}
@@ -123,7 +125,7 @@ export default function Home() {
               <div className=" flex flex-col ">
                 <motion.button
                   // whileHover={{ scale: 1.03 }}
-                  whileTap={{ x: 0.5, y: 0.5 }}
+                  whileTap={{ x: 1, y: 1 }}
                   type="submit"
                   className="absolute z-20  right-[0.4rem] top-[0.5rem] p-2 rounded-md bg-[#FF6B6B] text-white border-[#2C363F] border-[2px] "
                 >
