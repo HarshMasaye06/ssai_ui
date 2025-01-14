@@ -12,16 +12,16 @@ const SideBar = () => {
 
   const videoData = [
     {
-      title: "Video_1",
-      link: "https://www.youtube.com/watch?v=fcMC53eaqA0",
+      title: "Returning to PokéRogue in 2025",
+      link: "https://www.youtube.com/embed/S4-IMhlXfO0",
     },
     {
       title: "Video_2",
-      link: "",
+      link: null,
     },
     {
       title: "Video_3",
-      link: "",
+      link: null,
     },
   ];
 
@@ -52,7 +52,7 @@ const SideBar = () => {
               </div>
               <div className=" w-[4%] relative">
                 <motion.button
-                  whileTap={{ x: 1, y: 1 }}
+                  whileTap={{ x: 1.2, y: 1.2 }}
                   onClick={() => {
                     handleCardEnlarge(null);
                   }}
@@ -63,8 +63,24 @@ const SideBar = () => {
                 <div className=" w-[2.6rem] h-[2.5rem] z-10 absolute right-[0.3rem] top-[0.07rem] bg-[#2C363F] rounded-md"></div>
               </div>
             </header>
-            <section className=" h-[94.5%] flex justify-center items-center">
-              {videoFullScreen.link}
+            <section className=" h-[94.8%] flex justify-evenly items-start gap-2 mt-4">
+              {/* video section */}
+              <div className=" flex flex-col gap-3 h-full">
+                <div className=" bg-yellow-100 p-1 rounded-md outline outline-[3px] outline-[#2C363F] neubrutalism-shadow h-[73%] ">
+                  <iframe
+                    height={500}
+                    width={1000}
+                    src={videoFullScreen.link}
+                    allowFullScreen
+                    className=" rounded-sm"
+                  />
+                </div>
+                <div className=" bg-green-100 p-1 rounded-md outline outline-[3px] outline-[#2C363F] neubrutalism-shadow h-[22%]">
+                  <h1 className=" font-bold text-xl">{videoFullScreen.title}</h1>
+                </div>
+              </div>
+              {/* summary section */}
+              <div className="bg-yellow-100 p-1 rounded-md outline outline-[3px] outline-[#2C363F] neubrutalism-shadow w-[33%] h-[97%] "></div>
             </section>
           </motion.div>
         </div>

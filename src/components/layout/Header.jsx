@@ -10,7 +10,7 @@ const Header = () => {
       <div className=" h-full flex items-center  ">
         <motion.button
           whileHover={{ scale: 1.03 }}
-          whileTap={{ x: 1, y: 1 }}
+          whileTap={{ x: 1.5, y: 1.5 }}
           type="submit"
           className="absolute z-20 right-[0.5rem] top-[0.5rem] p-2 rounded-md bg-[#FF6B6B]  border-[#2C363F] border-[2px] "
         >

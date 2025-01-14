@@ -9,16 +9,19 @@ import SideBar from "@/components/layout/SideBar";
 import { motion } from "framer-motion";
 import { VscSend } from "react-icons/vsc";
 import LoadingScreen from "@/components/ui/loadingScreen";
+import { useMessages } from "@/hooks/useMessages";
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [messages, setMessages] = useState([
-    {
-      type: "answer",
-      content: "Hello! How can I help you today?",
-      links: ["Getting started", "Features", "Documentation"],
-    },
-  ]);
+  const { messages, isLoading, addMessage, setLoading } = useMessages();
+
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [messages, setMessages] = useState([
+  //   {
+  //     type: "answer",
+  //     content: "Hello! How can I help you today?",
+  //     links: ["Getting started", "Features", "Documentation"],
+  //   },
+  // ]);
 
   const { displayedText, isTyping } = useTypewriter(
     messages[messages.length - 1]?.content || "",
@@ -32,24 +35,21 @@ export default function Home() {
     if (!query.trim()) return;
 
     // Add user's question
-    setMessages((prev) => [...prev, { type: "question", content: query }]);
+    addMessage({ type: "question", content: query });
     setQuery("");
-    setIsLoading(true);
+    setLoading(true);
 
     // Simulate API delay
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     // Add AI's response
-    setMessages((prev) => [
-      ...prev,
-      {
-        type: "answer",
-        content:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet blanditiis repellat cupiditate maiores assumenda facilis porro praesentium. Neque praesentium perspiciatis ipsa maiores, ad fugit, exercitationem vitae possimus voluptatum id enim saepe nemo.",
-        links: ["Related topic 1", "Related topic 2"],
-      },
-    ]);
-    setIsLoading(false);
+    addMessage({
+      type: "answer",
+      content:
+        "This is a sample response. The AI would process your query here.",
+      links: ["Related topic 1", "Related topic 2"],
+    });
+    setLoading(false);
   };
 
   return (
@@ -107,35 +107,11 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <div className=" border-t-[3px] border-[#2C363F] p-6 bg-white w-full ">
-          <form
-            className="max-w-3xl mx-auto"
-            onSubmit={(e) => {
-              handleSubmit(e);
-            }}
-          >
-            <div className="relative">
-              <input
-                type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Enter your prompt or query"
-                className="w-full pl-4 pr-16 py-3 rounded-lg border-[3px] border-[#2C363F] focus:outline-none focus:ring-0 focus:border-[#2C363F] "
-              />
-              <div className=" flex flex-col ">
-                <motion.button
-                  // whileHover={{ scale: 1.03 }}
-                  whileTap={{ x: 1, y: 1 }}
-                  type="submit"
-                  className="absolute z-20  right-[0.4rem] top-[0.5rem] p-2 rounded-md bg-[#FF6B6B] text-white border-[#2C363F] border-[2px] "
-                >
-                  <VscSend className="w-4 h-4 -rotate-45 relative left-[0.05rem] " />
-                </motion.button>
-                <div className=" w-[2.2rem] h-[2.2rem] z-10 absolute right-[0.3rem] top-[0.65rem] bg-[#2C363F] rounded-md"></div>
-              </div>
-            </div>
-          </form>
-        </div>
+        <InputBar
+          query={query}
+          setQuery={setQuery}
+          handleSubmit={handleSubmit}
+        />
       </div>
     </div>
   );
