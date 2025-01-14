@@ -44,13 +44,13 @@ const VideoOverlay = () => {
         <section className=" h-[95%] flex justify-evenly items-start gap-2 mt-4">
           {/* video section */}
           <div className=" flex flex-col gap-3 h-full">
-            <div className=" bg-yellow-100 p-1 rounded-md outline outline-[3px] outline-[#2C363F] neubrutalism-shadow h-[73%] ">
+            <div className=" bg-yellow-100 p-1 rounded-md outline outline-[3px] outline-[#2C363F] neubrutalism-shadow h-[73%] flex justify-center items-center ">
               <iframe
                 height={500}
                 width={1000}
                 src={videoOverlayData.link}
                 allowFullScreen
-                className=" rounded-sm"
+                className=" rounded-[0.3rem] "
               />
             </div>
             <div className=" bg-[#4ECDC4] p-1 rounded-md outline outline-[3px] outline-[#2C363F] neubrutalism-shadow h-[22%]">
