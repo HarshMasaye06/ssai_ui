@@ -44,8 +44,8 @@ const SideBar = () => {
             }}
             className="bg-white rounded-lg p-2 border-[3px] border-[#2C363F] neubrutalism-shadow w-[90%] h-[90%] mx-4"
           >
-            <header className=" h-[5.2%] flex justify-between ">
-              <div className=" bg-yellow-100 w-[96%] mt-[3px] outline outline-[3px] outline-[#2C363F] px-2 flex items-center rounded-sm ">
+            <header className=" h-[5%] flex justify-evenly ">
+              <div className=" bg-yellow-100 w-[95%] mt-[3px] outline outline-[3px] outline-[#2C363F] px-2 flex items-center rounded-sm ">
                 <span className=" ">
                   http://localhost:3000/video/{videoFullScreen.title}
                 </span>
@@ -63,7 +63,7 @@ const SideBar = () => {
                 <div className=" w-[2.6rem] h-[2.5rem] z-10 absolute right-[0.3rem] top-[0.07rem] bg-[#2C363F] rounded-md"></div>
               </div>
             </header>
-            <section className=" h-[94.8%] flex justify-evenly items-start gap-2 mt-4">
+            <section className=" h-[95%] flex justify-evenly items-start gap-2 mt-4">
               {/* video section */}
               <div className=" flex flex-col gap-3 h-full">
                 <div className=" bg-yellow-100 p-1 rounded-md outline outline-[3px] outline-[#2C363F] neubrutalism-shadow h-[73%] ">
@@ -75,8 +75,10 @@ const SideBar = () => {
                     className=" rounded-sm"
                   />
                 </div>
-                <div className=" bg-green-100 p-1 rounded-md outline outline-[3px] outline-[#2C363F] neubrutalism-shadow h-[22%]">
-                  <h1 className=" font-bold text-xl">{videoFullScreen.title}</h1>
+                <div className=" bg-[#4ECDC4] p-1 rounded-md outline outline-[3px] outline-[#2C363F] neubrutalism-shadow h-[22%]">
+                  <h1 className=" font-bold text-xl">
+                    {videoFullScreen.title}
+                  </h1>
                 </div>
               </div>
               {/* summary section */}

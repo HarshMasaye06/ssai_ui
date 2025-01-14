@@ -1,11 +1,19 @@
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Button } from "../ui/button";
 import { motion } from "framer-motion";
+
+import { Teko } from "next/font/google";
+
+const teko = Teko({
+  weight: "700",
+  subsets: ["latin"],
+});
+
 const Header = () => {
   return (
     <div className="h-16 w-full border-b-[3px] border-[#2C363F] flex items-center px-8">
-      <div className="flex justify-center items-center h-full w-full">
-        <h1 className=" text-lg font-semibold ">SmartSource.AI</h1>
+      <div className="">
+        <h1 className={`text-3xl ${teko.className} mt-2 mx-auto`}>SmartSource.AI</h1>
       </div>
       <div className=" h-full flex items-center  ">
         <motion.button
