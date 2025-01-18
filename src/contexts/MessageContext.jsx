@@ -13,6 +13,9 @@ export function MessageProvider({ children }) {
       links: ["Getting started", "Features", "Documentation"],
     },
   ]);
+
+  const [reply, setReply] = useState("");
+
   const [isLoading, setIsLoading] = useState(false);
 
   const addMessage = (message) => {
@@ -22,8 +25,6 @@ export function MessageProvider({ children }) {
   const setLoading = (loading) => {
     setIsLoading(loading);
   };
-
-  
 
   return (
     <MessageContext.Provider
