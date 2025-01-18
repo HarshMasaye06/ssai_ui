@@ -4,7 +4,7 @@ import { VscSend } from "react-icons/vsc";
 
 const InputBar = ({ query, setQuery, handleSubmit }) => {
   return (
-    <div className=" border-t-[3px] border-[#2C363F] p-6 bg-white w-full ">
+    <div className=" border-t-[3px] border-[#2C363F] p-4 bg-white w-full ">
       <form
         className="max-w-3xl mx-auto"
         onSubmit={(e) => {
@@ -24,11 +24,11 @@ const InputBar = ({ query, setQuery, handleSubmit }) => {
               // whileHover={{ scale: 1.03 }}
               whileTap={{ x: 1, y: 1 }}
               type="submit"
-              className="absolute z-20  right-[0.4rem] top-[0.5rem] p-2 rounded-md bg-[#FF6B6B] text-white border-[#2C363F] border-[2px] "
+              className="absolute z-20  right-[0.5rem] top-[0.5rem] p-2 rounded-md bg-[#FF6B6B] text-white border-[#2C363F] border-[2px] "
             >
               <VscSend className="w-4 h-4 -rotate-45 relative left-[0.05rem] " />
             </motion.button>
-            <div className=" w-[2.2rem] h-[2.2rem] z-10 absolute right-[0.3rem] top-[0.65rem] bg-[#2C363F] rounded-md"></div>
+            <div className=" w-[2.2rem] h-[2.2rem] z-10 absolute right-[0.4rem] top-[0.65rem] bg-[#2C363F] rounded-md"></div>
           </div>
         </div>
       </form>

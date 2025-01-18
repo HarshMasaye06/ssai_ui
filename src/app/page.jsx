@@ -32,6 +32,20 @@ export default function Home() {
     }, 2000);
   };
 
+  function generateRandomLorem() {
+    const lorem =
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+
+    // Split the text into an array of words
+    const words = lorem.split(" ");
+
+    // Generate a random size between 10 and 50
+    const wordCount = Math.floor(Math.random() * (50 - 10 + 1)) + 10;
+
+    // Select a random slice of words
+    return words.slice(0, wordCount).join(" ");
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!query.trim()) return;
@@ -48,7 +62,7 @@ export default function Home() {
     addMessage({
       type: "answer",
       content:
-        "This is a sample response. The AI would process your query here.",
+        generateRandomLorem(),
       links: ["Related topic 1", "Related topic 2"],
     });
     setLoading(false);
@@ -64,7 +78,7 @@ export default function Home() {
         {/* Header */}
         <Header />
         {/* ChatArea */}
-        <div className="flex-1 overflow-auto p-6 space-y-4 ">
+        <div className="flex-1 overflow-auto p-4 space-y-4 ">
           {messages.map((message, i) => {
             const isLatestMessage = i === messages.length - 1;
             return (
@@ -75,7 +89,6 @@ export default function Home() {
                 }`}
               >
                 <motion.div
-                  whileHover={{ scale: 1.01 }}
                   className={`rounded-lg pl-3 pr-2 pt-2 pb-1 outline outline-3 outline-[#2C363F] neubrutalism-shadow ${
                     message.type === "question"
                       ? "bg-green-200 text-[#252525]"
@@ -107,6 +120,7 @@ export default function Home() {
                           </motion.button>
                         ))}
                       </div>
+                      {/* Copy Button */}
                       <div className=" flex flex-col">
                         <motion.button
                           whileTap={{ x: 1, y: 1 }}

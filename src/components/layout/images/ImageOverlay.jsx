@@ -37,7 +37,7 @@ const ImageOverlay = () => {
             >
               <CgClose className="relative text-xl text-white" />
             </motion.button>
-            <div className=" w-[2.6rem] h-[2.5rem] z-10 absolute right-[0.3rem] top-[0.05rem] bg-[#2C363F] rounded-md"></div>
+            <div className=" w-[2.5rem] h-[2.5rem] z-10 absolute right-[0.3rem] top-[0.02rem] bg-[#2C363F] rounded-md"></div>
           </div>
         </header>
         <section className=" h-[95%] w-full flex justify-evenly items-center gap-2 mt-4">
