@@ -1,3 +1,5 @@
+
+
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Button } from "../ui/button";
 import { motion } from "framer-motion";
@@ -13,7 +15,7 @@ const teko = Teko({
 const Header = () => {
   const { closeSideBar, openSideBar, isSideBarOpen } = useLayout();
   return (
-    <div className="h-16 w-full border-b-[3px] border-[#2C363F] flex items-center px-8">
+    <div className="h-[9vh] w-full border-b-[3px] border-[#2C363F] flex items-center px-8">
       <div className="">
         <h1 className={`text-3xl ${teko.className} mt-2 mx-auto`}>
           SmartSource<strong className=" text-[#FF6B6B] font-serif">.</strong>AI

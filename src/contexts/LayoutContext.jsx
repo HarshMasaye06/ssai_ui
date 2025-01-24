@@ -7,6 +7,7 @@ export const LayoutContext = createContext();
 export function LayoutProvider({ children }) {
   const [isSideBarOpen, setSideBarOpen] = useState(true);
   const [editMode, setEditMode] = useState(false);
+  const [editMessage, setEditMessage] = useState(null);
 
   const closeSideBar = () => {
     setSideBarOpen(false);
@@ -15,19 +16,32 @@ export function LayoutProvider({ children }) {
     setSideBarOpen(true);
   };
 
-  const toggleEditMode = () => {
+  const toggleEditMode = (msg) => {
+    if (editMode === true) {
+      setEditMessage(msg);
+    } else if (editMode === false) {
+      setSideBarOpen(!isSideBarOpen);
+      setEditMode(!editMode);
+      setEditMessage(msg);
+    }
+  };
+
+  const closeEditMode = () => {
     setSideBarOpen(!isSideBarOpen);
     setEditMode(!editMode);
+    setEditMessage(null);
   };
 
   return (
     <LayoutContext.Provider
       value={{
         editMode,
+        editMessage,
         isSideBarOpen,
         closeSideBar,
         openSideBar,
         toggleEditMode,
+        closeEditMode,
       }}
     >
       {children}

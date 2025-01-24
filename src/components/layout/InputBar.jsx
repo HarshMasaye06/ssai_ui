@@ -1,10 +1,17 @@
+import { useLayout } from "@/hooks/useLayout";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { VscSend } from "react-icons/vsc";
 
 const InputBar = ({ query, setQuery, handleSubmit }) => {
+  const { editMode, toggleEditMode } = useLayout();
+
   return (
-    <div className=" border-t-[3px] border-[#2C363F] p-4 bg-white w-full ">
+    <footer
+      className={` ${
+        editMode ? " w-[30vw] border-r-[3px] border-[#2C363F]" : "w-full"
+      } border-t-[3px] border-[#2C363F] p-4 bg-white h-[11vh] `}
+    >
       <form
         className="max-w-3xl mx-auto"
         onSubmit={(e) => {
@@ -32,7 +39,7 @@ const InputBar = ({ query, setQuery, handleSubmit }) => {
           </div>
         </div>
       </form>
-    </div>
+    </footer>
   );
 };
 

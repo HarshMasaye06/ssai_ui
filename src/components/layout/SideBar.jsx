@@ -15,16 +15,16 @@ const SideBar = () => {
 
   return (
     <motion.div
-      initial={{ width: "18vw", scaleX: 1 }}
+      initial={{ width: "22vw", scaleX: 1 }}
       animate={{
-        width: isSideBarOpen ? "18vw" : "3px",
+        width: isSideBarOpen ? "22vw" : "3px",
         scaleX: isSideBarOpen ? 1 : 0,
         transformOrigin: "left",
       }}
       transition={{ duration: 0.3 }}
-      exit={{ width: "18vw", scaleX: 1 }}
+      exit={{ width: "22vw", scaleX: 1 }}
       className={` ${
-        isSideBarOpen ? "w-[18vw]" : "w-[3px]"
+        isSideBarOpen ? "w-[22vw]" : "w-[3px]"
       } h-screen border-r-[3px] border-[#2C363F] flex flex-col`}
     >
       {isVideoOverlayOpen && <VideoOverlay />}

@@ -11,9 +11,10 @@ import { VscSend } from "react-icons/vsc";
 import LoadingScreen from "@/components/ui/loadingScreen";
 import { useMessages } from "@/hooks/useMessages";
 import { IoCopyOutline, IoCheckmarkOutline } from "react-icons/io5";
-import { CircleArrowOutUpRight, Pen } from "lucide-react";
+import { CircleArrowOutUpRight, Edit, Pen } from "lucide-react";
 import MessageBox from "@/components/ui/MessageBox";
 import { useLayout } from "@/hooks/useLayout";
+import EditCanvas from "@/components/layout/EditCanvas";
 
 export default function Home() {
   const { messages, isLoading, addMessage, setLoading } = useMessages();
@@ -63,14 +64,16 @@ export default function Home() {
   return (
     <div className="flex h-screen w-screen bg-[#F5F5F5]">
       {isLoading && <LoadingScreen />}
-      <div className=" h-screen">
-        <SideBar />
-      </div>
+      <SideBar />
       <div className=" flex flex-col w-full ">
         {/* Header */}
         <Header />
         {/* ChatArea */}
-        <div className="flex-1 overflow-auto p-4 space-y-4 ">
+        <section
+          className={` ${
+            editMode ? " w-[30vw] border-r-[3px] border-[#2C363F]" : ""
+          } h-[80vh] overflow-auto p-4 space-y-4 `}
+        >
           {messages.map((message, i) => {
             const m_len = messages.length;
             return (
@@ -87,21 +90,10 @@ export default function Home() {
                   isTyping={isTyping}
                   displayedText={displayedText}
                 />
-                {editMode && (
-                  <div
-                    className={`${
-                      editMode
-                        ? " h-screen w-[70vw] absolute z-50 top-0 right-0 bg-pink-200 "
-                        : ""
-                    }`}
-                  >
-                    {message.content}
-                  </div>
-                )}
               </div>
             );
           })}
-        </div>
+        </section>
         {/* Input Area */}
         <InputBar
           query={query}
@@ -109,6 +101,7 @@ export default function Home() {
           handleSubmit={handleSubmit}
         />
       </div>
+      <EditCanvas />
     </div>
   );
 }
