@@ -72,7 +72,7 @@ export default function Home() {
         <section
           className={` ${
             editMode ? " w-[30vw] border-r-[3px] border-[#2C363F]" : ""
-          } h-[80vh] overflow-auto p-4 space-y-4 `}
+          } h-[82vh] overflow-auto p-4 space-y-4 `}
         >
           {messages.map((message, i) => {
             const m_len = messages.length;

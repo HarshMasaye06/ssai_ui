@@ -24,7 +24,7 @@ const SideBar = () => {
       transition={{ duration: 0.3 }}
       exit={{ width: "22vw", scaleX: 1 }}
       className={` ${
-        isSideBarOpen ? "w-[22vw]" : "w-[3px]"
+        isSideBarOpen ? "w-[22vw]" : " hidden"
       } h-screen border-r-[3px] border-[#2C363F] flex flex-col`}
     >
       {isVideoOverlayOpen && <VideoOverlay />}

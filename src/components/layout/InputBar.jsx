@@ -10,7 +10,7 @@ const InputBar = ({ query, setQuery, handleSubmit }) => {
     <footer
       className={` ${
         editMode ? " w-[30vw] border-r-[3px] border-[#2C363F]" : "w-full"
-      } border-t-[3px] border-[#2C363F] p-4 bg-white h-[11vh] `}
+      } border-t-[3px] border-[#2C363F] p-4 bg-white h-[10vh] `}
     >
       <form
         className="max-w-3xl mx-auto"
