@@ -11,10 +11,13 @@ import { VscSend } from "react-icons/vsc";
 import LoadingScreen from "@/components/ui/loadingScreen";
 import { useMessages } from "@/hooks/useMessages";
 import { IoCopyOutline, IoCheckmarkOutline } from "react-icons/io5";
-import { CircleArrowOutUpRight } from "lucide-react";
+import { CircleArrowOutUpRight, Pen } from "lucide-react";
+import MessageBox from "@/components/ui/MessageBox";
+import { useLayout } from "@/hooks/useLayout";
 
 export default function Home() {
   const { messages, isLoading, addMessage, setLoading } = useMessages();
+  const { editMode } = useLayout();
 
   const { displayedText, isTyping } = useTypewriter(
     messages[messages.length - 1]?.content || "",
@@ -23,19 +26,9 @@ export default function Home() {
 
   const [query, setQuery] = useState("");
 
-  const [isCopied, setIsCopied] = useState(null);
-
-  const changeCopyBtn = (id) => {
-    setIsCopied(id);
-    setTimeout(() => {
-      setIsCopied(null);
-    }, 2000);
-  };
-
   function generateRandomLorem() {
     const lorem =
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-
     // Split the text into an array of words
     const words = lorem.split(" ");
 
@@ -61,8 +54,7 @@ export default function Home() {
     // Add AI's response
     addMessage({
       type: "answer",
-      content:
-        generateRandomLorem(),
+      content: generateRandomLorem(),
       links: ["Related topic 1", "Related topic 2"],
     });
     setLoading(false);
@@ -74,74 +66,38 @@ export default function Home() {
       <div className=" h-screen">
         <SideBar />
       </div>
-      <div className=" flex flex-col w-[80%] ">
+      <div className=" flex flex-col w-full ">
         {/* Header */}
         <Header />
         {/* ChatArea */}
         <div className="flex-1 overflow-auto p-4 space-y-4 ">
           {messages.map((message, i) => {
-            const isLatestMessage = i === messages.length - 1;
+            const m_len = messages.length;
             return (
               <div
                 key={i}
-                className={`max-w-3xl ${
-                  message.type === "question" && "ml-auto"
-                }`}
+                className={` ${
+                  editMode ? "max-w-[30vw] z-50 " : "max-w-[45vw]"
+                }  ${message.type === "question" && "ml-auto"}`}
               >
-                <motion.div
-                  className={`rounded-lg pl-3 pr-2 pt-2 pb-1 outline outline-3 outline-[#2C363F] neubrutalism-shadow ${
-                    message.type === "question"
-                      ? "bg-green-200 text-[#252525]"
-                      : "bg-yellow-100"
-                  }`}
-                >
-                  <p className="text-lg">
-                    {i === messages.length - 1 && message.type === "answer"
-                      ? displayedText
-                      : message.content}
-                    {i === messages.length - 1 &&
-                      message.type === "answer" &&
-                      isTyping && (
-                        <span className="inline-block w-[2px] h-4 ml-1 bg-[#2C363F] animate-pulse" />
-                      )}
-                  </p>
-                  {message.links && (!isTyping || !isLatestMessage) && (
-                    <div className="mt-4 flex justify-between relative ">
-                      <div className=" flex gap-2">
-                        {message.links.map((link, j) => (
-                          <motion.button
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                            key={j}
-                            className="inline-flex items-center z-20 gap-2 text-sm bg-[#4ECDC4] text-[#2C363F] px-4 py-1 rounded-full border-[3px] border-[#2C363F] font-bold "
-                          >
-                            {link}
-                            <CircleArrowOutUpRight size={20} />
-                          </motion.button>
-                        ))}
-                      </div>
-                      {/* Copy Button */}
-                      <div className=" flex flex-col">
-                        <motion.button
-                          whileTap={{ x: 1, y: 1 }}
-                          onClick={() => {
-                            navigator.clipboard.writeText(message.content);
-                            changeCopyBtn(i);
-                          }}
-                          type="submit"
-                          className="absolute z-20 -right-[0.2rem] top-[0.1rem] p-1 rounded-md bg-[#FF6B6B] text-white border-[#2C363F] border-[2px] "
-                        >
-                          {isCopied === i ? (
-                            <IoCheckmarkOutline className="text-xl text-[#f5f5f5]" />
-                          ) : (
-                            <IoCopyOutline className="text-xl" />
-                          )}
-                        </motion.button>
-                        <div className=" w-[2rem] h-[2rem] z-10 absolute -right-[0.3rem] top-[0.2rem] bg-[#2C363F] rounded-md"></div>
-                      </div>
-                    </div>
-                  )}
-                </motion.div>
+                <MessageBox
+                  message={message}
+                  i={i}
+                  m_len={m_len}
+                  isTyping={isTyping}
+                  displayedText={displayedText}
+                />
+                {editMode && (
+                  <div
+                    className={`${
+                      editMode
+                        ? " h-screen w-[70vw] absolute z-50 top-0 right-0 bg-pink-200 "
+                        : ""
+                    }`}
+                  >
+                    {message.content}
+                  </div>
+                )}
               </div>
             );
           })}

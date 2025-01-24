@@ -3,6 +3,7 @@ import { Button } from "../ui/button";
 import { motion } from "framer-motion";
 
 import { Teko } from "next/font/google";
+import { useLayout } from "@/hooks/useLayout";
 
 const teko = Teko({
   weight: "700",
@@ -10,17 +11,20 @@ const teko = Teko({
 });
 
 const Header = () => {
+  const { closeSideBar, openSideBar, isSideBarOpen } = useLayout();
   return (
     <div className="h-16 w-full border-b-[3px] border-[#2C363F] flex items-center px-8">
       <div className="">
-        <h1 className={`text-3xl ${teko.className} mt-2 mx-auto`}>SmartSource.AI</h1>
+        <h1 className={`text-3xl ${teko.className} mt-2 mx-auto`}>
+          SmartSource<strong className=" text-[#FF6B6B] font-serif">.</strong>AI
+        </h1>
       </div>
       <div className=" h-full flex items-center  ">
         <motion.button
-          whileHover={{ scale: 1.03 }}
           whileTap={{ x: 1.5, y: 1.5 }}
+          onClick={isSideBarOpen ? closeSideBar : openSideBar}
           type="submit"
-          className="absolute z-20 right-[0.5rem] top-[0.5rem] p-2 rounded-md bg-[#FF6B6B]  border-[#2C363F] border-[2px] "
+          className="absolute z-20 right-[0.5rem] top-[0.5rem] p-2 rounded-md bg-[#FF6B6B] hover:bg-[#ff4d4d] border-[#2C363F] border-[2px] "
         >
           <RxHamburgerMenu className="relative left-[0.05rem] text-xl text-white" />
         </motion.button>

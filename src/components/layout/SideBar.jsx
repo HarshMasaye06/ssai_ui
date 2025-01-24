@@ -5,19 +5,35 @@ import VideoOverlay from "./videos/VideoOverlay";
 // image components
 import ImageSection from "./images/ImageSection";
 import ImageOverlay from "./images/ImageOverlay";
+import { useLayout } from "@/hooks/useLayout";
+
+import { motion } from "framer-motion";
 
 const SideBar = () => {
   const { isVideoOverlayOpen, isImageOverlayOpen } = useOverlay();
+  const { isSideBarOpen } = useLayout();
 
   return (
-    <div className="h-screen border-r-[3px] border-[#2C363F] flex flex-col">
+    <motion.div
+      initial={{ width: "18vw", scaleX: 1 }}
+      animate={{
+        width: isSideBarOpen ? "18vw" : "3px",
+        scaleX: isSideBarOpen ? 1 : 0,
+        transformOrigin: "left",
+      }}
+      transition={{ duration: 0.3 }}
+      exit={{ width: "18vw", scaleX: 1 }}
+      className={` ${
+        isSideBarOpen ? "w-[18vw]" : "w-[3px]"
+      } h-screen border-r-[3px] border-[#2C363F] flex flex-col`}
+    >
       {isVideoOverlayOpen && <VideoOverlay />}
-      {isImageOverlayOpen && <ImageOverlay />}
+      {/* {isImageOverlayOpen && <ImageOverlay />} */}
       {/* Images Section */}
-      <ImageSection />
+      {/* <ImageSection /> */}
       {/* Videos Section */}
       <VideoSection />
-    </div>
+    </motion.div>
   );
 };
 

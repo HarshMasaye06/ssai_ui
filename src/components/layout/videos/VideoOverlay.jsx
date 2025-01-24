@@ -1,9 +1,12 @@
 import { useOverlay } from "@/hooks/useVideoOverlay";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 import { CgClose } from "react-icons/cg";
 
 const VideoOverlay = () => {
   const { videoOverlayData, closeMiniPlayer } = useOverlay();
+
+  const video_id = "zGom2pCKUhU"
 
   return (
     <div className="absolute inset-0 bg-black/20 backdrop-blur-sm z-50 flex items-center justify-center">
@@ -48,7 +51,7 @@ const VideoOverlay = () => {
               <iframe
                 height={500}
                 width={1000}
-                src={videoOverlayData.link}
+                src={`https://www.youtube.com/embed/${video_id}`}
                 allowFullScreen
                 className=" rounded-[0.3rem] "
               />
@@ -58,7 +61,20 @@ const VideoOverlay = () => {
             </div>
           </div>
           {/* summary section */}
-          <div className="bg-yellow-100 p-1 rounded-md outline outline-[3px] outline-[#2C363F] neubrutalism-shadow w-[33%] h-[97%] "></div>
+          <div className="bg-yellow-100 p-1 rounded-md outline outline-[3px] outline-[#2C363F] neubrutalism-shadow w-[33%] h-[97%] flex justify-center items-center">
+            <div className=" w-[100%] relative">
+              <motion.button
+                whileTap={{ x: 1.2, y: 1.2 }}
+                onClick={() => {
+                  // closeMiniPlayer();
+                }}
+                className="absolute z-20 right-[0.5rem] p-2 rounded-md bg-[#FF6B6B]  border-[#2C363F] border-[2px] "
+              >
+                <h1 className=" font-semibold">Summarize Video</h1>
+              </motion.button>
+              <div className=" w-[9.7rem] h-[2.85rem] z-10 absolute right-[0.3rem] top-[0.07rem] bg-[#2C363F] rounded-md"></div>
+            </div>
+          </div>
         </section>
       </motion.div>
     </div>

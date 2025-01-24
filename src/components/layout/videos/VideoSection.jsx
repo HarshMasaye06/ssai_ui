@@ -1,5 +1,6 @@
 import { useOverlay } from "@/hooks/useVideoOverlay";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 const VideoSection = () => {
   const { openMiniPlayer } = useOverlay();
@@ -7,20 +8,55 @@ const VideoSection = () => {
   const videosInfo = [
     {
       title: "Returning to PokéRogue in 2025",
-      link: "https://www.youtube.com/embed/S4-IMhlXfO0",
+      link: "https://www.youtube.com/S4-IMhlXfO0",
+      thumbnail: "",
+      embeded: "",
     },
     {
       title: "Video_2",
-      link: null,
+      link: "https://youtu.be/zGom2pCKUhU",
+      thumbnail: "",
+      embeded: "",
     },
     {
       title: "Video_3",
       link: null,
+      thumbnail: "",
+      embeded: "",
     },
   ];
 
+  const thumbNailGenerator = (video_link) => {
+    try {
+      const regex =
+        /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/|.*[?&]v=))([\w-]{11})/;
+      const match = video_link.match(regex);
+      return match ? match[1] : null;
+    } catch (error) {
+      console.error("Invalid URL:", error);
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    try {
+    } catch (error) {
+      console.log(error);
+    }
+
+    // try {
+    //   const regex =
+    //     /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/|.*[?&]v=))([\w-]{11})/;
+    //   const match = video_link.match(regex);
+    //   return match ? match[1] : null;
+    // } catch (error) {
+    //   console.error("Invalid URL:", error);
+    //   return null;
+    // }
+  }, videosInfo);
+
   return (
-    <div className="w-[20vw] h-[45%] overflow-auto">
+    <div className=" h-screen overflow-auto">
       <h2 className="text-lg font-bold text-[#2C363F] p-2 sticky top-0 bg-[#F5F5F5] z-20">
         Videos
       </h2>
