@@ -2,6 +2,7 @@ import { useLayout } from "@/hooks/useLayout";
 import { motion } from "framer-motion";
 import { CgClose } from "react-icons/cg";
 import { Teko } from "next/font/google";
+import { useEffect, useState } from "react";
 
 const teko = Teko({
   weight: "700",
@@ -9,7 +10,13 @@ const teko = Teko({
 });
 const EditCanvas = () => {
   const { editMode, editMessage, closeEditMode } = useLayout();
-  console.log(editMessage);
+  const [editableContent, setEditableContent] = useState("");
+
+  useEffect(() => {
+    setEditableContent(editMessage?.content || "");
+  }, [editMessage]);
+
+  console.log(editableContent);
   return (
     <motion.div
       className={`${
@@ -29,8 +36,21 @@ const EditCanvas = () => {
         <h1 className={`${teko.className} text-xl`}>Canvas mode</h1>
       </header>
 
-      <div className=" mt-4 flex justify-between items-center">
-        {editMessage?.content}
+      <div className="mt-4 flex h-[calc(100%-3rem)]">
+        {/* Number Row */}
+        <div className="w-8 flex flex-col items-center text-gray-400 text-sm">
+          {editableContent.split("\n").map((_, i) => (
+            <span key={i}>{i + 1}</span>
+          ))}
+        </div>
+
+        {/* Text Area */}
+        <textarea
+          value={editableContent}
+          onChange={(e) => setEditableContent(e.target.value)}
+          className="w-full h-full resize-none border-l pl-4 focus:outline-none text-gray-800"
+          style={{ fontFamily: "monospace", lineHeight: "1.5" }}
+        />
       </div>
     </motion.div>
   );

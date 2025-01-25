@@ -30,13 +30,8 @@ export default function Home() {
   function generateRandomLorem() {
     const lorem =
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-    // Split the text into an array of words
     const words = lorem.split(" ");
-
-    // Generate a random size between 10 and 50
     const wordCount = Math.floor(Math.random() * (50 - 10 + 1)) + 10;
-
-    // Select a random slice of words
     return words.slice(0, wordCount).join(" ");
   }
 
@@ -44,20 +39,22 @@ export default function Home() {
     e.preventDefault();
     if (!query.trim()) return;
 
-    // Add user's question
     addMessage({ type: "question", content: query });
     setQuery("");
     setLoading(true);
 
-    // Simulate API delay
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    // Add AI's response
-    addMessage({
+    const responses = Array.from({ length: 4 }, (_, index) => ({
       type: "answer",
-      content: generateRandomLorem(),
-      links: ["Related topic 1", "Related topic 2"],
-    });
+      content: `${generateRandomLorem()} (Response ${index + 1})`,
+      links: [
+        `Related topic ${index * 2 + 1}`,
+        `Related topic ${index * 2 + 2}`,
+      ],
+    }));
+
+    responses.forEach((response) => addMessage(response));
     setLoading(false);
   };
 
@@ -65,21 +62,20 @@ export default function Home() {
     <div className="flex h-screen w-screen bg-[#F5F5F5]">
       {isLoading && <LoadingScreen />}
       <SideBar />
-      <div className=" flex flex-col w-full ">
-        {/* Header */}
+      <div className="flex flex-col w-full">
         <Header />
-        {/* ChatArea */}
         <section
-          className={` ${
-            editMode ? " w-[30vw] border-r-[3px] border-[#2C363F]" : ""
-          } h-[82vh] overflow-auto p-4 space-y-4 `}
+          className={`${
+            editMode ? "w-[30vw] border-r-[3px] border-[#2C363F]" : ""
+          } h-[82vh] overflow-auto p-4 space-y-4`}
         >
+          {/* <div className="grid grid-cols-2 gap-4"> */}
           {messages.map((message, i) => {
             const m_len = messages.length;
             return (
-              <div
+              <motion.div
                 key={i}
-                className={` ${
+                className={`${
                   editMode ? "max-w-[30vw] z-50 " : "max-w-[45vw]"
                 }  ${message.type === "question" && "ml-auto"}`}
               >
@@ -90,11 +86,30 @@ export default function Home() {
                   isTyping={isTyping}
                   displayedText={displayedText}
                 />
-              </div>
+                {/* {message.type === "answer" ? (
+                  <div className="grid grid-cols-2 gap-4" >
+                    <MessageBox
+                      message={message}
+                      i={i}
+                      m_len={m_len}
+                      isTyping={isTyping}
+                      displayedText={displayedText}
+                    />
+                  </div>
+                ) : (
+                  <MessageBox
+                    message={message}
+                    i={i}
+                    m_len={m_len}
+                    isTyping={isTyping}
+                    displayedText={displayedText}
+                  />
+                )} */}
+              </motion.div>
             );
           })}
+          {/* </div> */}
         </section>
-        {/* Input Area */}
         <InputBar
           query={query}
           setQuery={setQuery}

@@ -17,18 +17,13 @@ const MessageBox = ({ message, i, m_len, isTyping, displayedText }) => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
       transition={{ duration: 0.3 }}
-      className={`${
-        // editMode
-        // ? "h-screen w-[30vw] z-50 absolute top-0 left-0 flex flex-col justify-between"
-        // :
-        "outline outline-3 outline-[#2C363F] rounded-lg neubrutalism-shadow"
-      }  px-2 pt-2 pb-1 ${
+      className={`${"outline outline-3 outline-[#2C363F] rounded-lg neubrutalism-shadow"}  px-2 pt-2 pb-1 ${
         message.type === "question"
           ? "bg-green-200 text-[#252525]"
-          : "bg-yellow-100"
+          : "bg-yellow-100  "
       }`}
     >
-      <p className="text-lg">
+      <p className="text-lg h-[90%]">
         {isLatestMessage && message.type === "answer"
           ? displayedText
           : message.content}
@@ -36,7 +31,7 @@ const MessageBox = ({ message, i, m_len, isTyping, displayedText }) => {
           <span className="inline-block w-[2px] h-4 ml-1 bg-[#2C363F] animate-pulse" />
         )}
       </p>
-      <div>
+      <div className=" h-[10%]">
         {message.links && (!isTyping || !isLatestMessage) && (
           <div className="w-full flex justify-evenly">
             {/* Message Links */}
