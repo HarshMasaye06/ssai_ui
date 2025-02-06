@@ -6,7 +6,7 @@ import { CgClose } from "react-icons/cg";
 const VideoOverlay = () => {
   const { videoOverlayData, closeMiniPlayer } = useOverlay();
 
-  const video_id = "zGom2pCKUhU"
+  const video_id = "HinL5jCy_oI"
 
   return (
     <div className="absolute inset-0 bg-black/20 backdrop-blur-sm z-50 flex items-center justify-center">

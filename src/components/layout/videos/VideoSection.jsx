@@ -7,7 +7,7 @@ const VideoSection = () => {
 
   const videosInfo = [
     {
-      title: "Returning to PokéRogue in 2025",
+      title: "Video_1",
       link: "https://www.youtube.com/S4-IMhlXfO0",
       thumbnail: "",
       embeded: "",
