@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { CgClose } from "react-icons/cg";
 import { Teko } from "next/font/google";
 import { useEffect, useState } from "react";
+import CodeMirror from "@uiw/react-codemirror";
 
 const teko = Teko({
   weight: "700",
@@ -37,20 +38,21 @@ const EditCanvas = () => {
       </header>
 
       <div className="mt-4 flex h-[calc(100%-3rem)]">
+        <CodeMirror value={editableContent} height="calc(100vh - 8rem)" width="69vw" />
         {/* Number Row */}
-        <div className="w-8 flex flex-col items-center text-gray-400 text-sm">
+        {/* <div className="w-8 flex flex-col items-center text-gray-400 text-sm">
           {editableContent.split("\n").map((_, i) => (
             <span key={i}>{i + 1}</span>
           ))}
-        </div>
+        </div> */}
 
         {/* Text Area */}
-        <textarea
+        {/* <textarea
           value={editableContent}
           onChange={(e) => setEditableContent(e.target.value)}
           className="w-full h-full resize-none border-l pl-4 focus:outline-none text-gray-800"
           style={{ fontFamily: "monospace", lineHeight: "1.5" }}
-        />
+        /> */}
       </div>
     </motion.div>
   );

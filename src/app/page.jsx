@@ -76,7 +76,8 @@ export default function Home() {
               <motion.div
                 key={i}
                 className={`${
-                  editMode ? "max-w-[30vw] z-50 " : "max-w-[45vw]"
+                  editMode ? "max-w-[30vw] z-50 " : " max-w-[45vw] "
+                  // : `${message.length === 4 ? "w-full" : "max-w-[45vw]"}`
                 }  ${message.type === "question" && "ml-auto"}`}
               >
                 <MessageBox
