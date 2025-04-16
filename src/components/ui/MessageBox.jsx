@@ -37,15 +37,17 @@ const MessageBox = ({ message, i, m_len, isTyping, displayedText }) => {
             {/* Message Links */}
             <div className=" w-[90%] flex gap-1">
               {message.links.map((link, j) => (
-                <motion.button
+                <motion.a
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   key={j}
+                  href={link}
+                  target="_blank"
                   className="inline-flex items-center z-20 gap-1 text-sm bg-[#4ECDC4] text-[#2C363F] px-2 py-1 rounded-full border-[3px] border-[#2C363F] font-bold "
                 >
                   {link}
                   <CircleArrowOutUpRight size={20} />
-                </motion.button>
+                </motion.a>
               ))}
             </div>
             <div className="flex gap-1">

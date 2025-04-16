@@ -17,7 +17,6 @@ const EditCanvas = () => {
     setEditableContent(editMessage?.content || "");
   }, [editMessage]);
 
-  console.log(editableContent);
   return (
     <motion.div
       className={`${

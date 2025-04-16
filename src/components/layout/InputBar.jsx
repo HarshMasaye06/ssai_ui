@@ -1,10 +1,15 @@
 import { useLayout } from "@/hooks/useLayout";
+import { checkHealth } from "@/utils/healthChecker";
+import { searchAPI } from "@/utils/searchAPI";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { VscSend } from "react-icons/vsc";
 
 const InputBar = ({ query, setQuery, handleSubmit }) => {
   const { editMode, toggleEditMode } = useLayout();
+
+
+  
 
   return (
     <footer
@@ -14,7 +19,7 @@ const InputBar = ({ query, setQuery, handleSubmit }) => {
     >
       <form
         className="max-w-3xl mx-auto"
-        onSubmit={(e) => {
+        onSubmit={async(e) => {
           handleSubmit(e);
         }}
       >

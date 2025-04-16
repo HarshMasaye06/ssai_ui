@@ -15,6 +15,8 @@ import { CircleArrowOutUpRight, Edit, Pen } from "lucide-react";
 import MessageBox from "@/components/ui/MessageBox";
 import { useLayout } from "@/hooks/useLayout";
 import EditCanvas from "@/components/layout/EditCanvas";
+import { searchAPI } from "@/utils/searchAPI";
+import { youtubeSearchAPI } from "@/utils/youtubeSearchAPI";
 
 export default function Home() {
   const { messages, isLoading, addMessage, setLoading } = useMessages();
@@ -26,6 +28,8 @@ export default function Home() {
   );
 
   const [query, setQuery] = useState("");
+  const [videoResults, setVideoResults] = useState([]);
+
 
   function generateRandomLorem() {
     const lorem =
@@ -43,25 +47,41 @@ export default function Home() {
     setQuery("");
     setLoading(true);
 
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    try {
+      const [result, videoResult] = await Promise.all([
+        searchAPI(query),
+        youtubeSearchAPI(query),
+      ]);
 
-    const responses = Array.from({ length: 4 }, (_, index) => ({
-      type: "answer",
-      content: `${generateRandomLorem()} (Response ${index + 1})`,
-      links: [
-        `Related topic ${index * 2 + 1}`,
-        `Related topic ${index * 2 + 2}`,
-      ],
-    }));
+      // Text search handling
+      if (result && Array.isArray(result)) {
+        const responses = result.map((item) => ({
+          type: "answer",
+          content: item.content,
+          links: [item.links],
+        }));
+        responses.forEach((response) => addMessage(response));
+      }
 
-    responses.forEach((response) => addMessage(response));
-    setLoading(false);
+      // Video handling
+      if (videoResult && Array.isArray(videoResult)) {
+        setVideoResults(videoResult); // ← store videos for sidebar
+      }
+    } catch (error) {
+      addMessage({
+        type: "answer",
+        content: "There was an error processing your request.",
+        links: [],
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="flex h-screen w-screen bg-[#F5F5F5]">
       {isLoading && <LoadingScreen />}
-      <SideBar />
+      <SideBar videoResults={videoResults} />
       <div className="flex flex-col w-full">
         <Header />
         <section
@@ -69,7 +89,6 @@ export default function Home() {
             editMode ? "w-[30vw] border-r-[3px] border-[#2C363F]" : ""
           } h-[82vh] overflow-auto p-4 space-y-4`}
         >
-          {/* <div className="grid grid-cols-2 gap-4"> */}
           {messages.map((message, i) => {
             const m_len = messages.length;
             return (
@@ -77,7 +96,6 @@ export default function Home() {
                 key={i}
                 className={`${
                   editMode ? "max-w-[30vw] z-50 " : " max-w-[45vw] "
-                  // : `${message.length === 4 ? "w-full" : "max-w-[45vw]"}`
                 }  ${message.type === "question" && "ml-auto"}`}
               >
                 <MessageBox
@@ -87,25 +105,6 @@ export default function Home() {
                   isTyping={isTyping}
                   displayedText={displayedText}
                 />
-                {/* {message.type === "answer" ? (
-                  <div className="grid grid-cols-2 gap-4" >
-                    <MessageBox
-                      message={message}
-                      i={i}
-                      m_len={m_len}
-                      isTyping={isTyping}
-                      displayedText={displayedText}
-                    />
-                  </div>
-                ) : (
-                  <MessageBox
-                    message={message}
-                    i={i}
-                    m_len={m_len}
-                    isTyping={isTyping}
-                    displayedText={displayedText}
-                  />
-                )} */}
               </motion.div>
             );
           })}

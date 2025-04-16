@@ -2,14 +2,11 @@ import { useOverlay } from "@/hooks/useVideoOverlay";
 // video components
 import VideoSection from "./videos/VideoSection";
 import VideoOverlay from "./videos/VideoOverlay";
-// image components
-import ImageSection from "./images/ImageSection";
-import ImageOverlay from "./images/ImageOverlay";
 import { useLayout } from "@/hooks/useLayout";
 
 import { motion } from "framer-motion";
 
-const SideBar = () => {
+const SideBar = ({ videoResults }) => {
   const { isVideoOverlayOpen, isImageOverlayOpen } = useOverlay();
   const { isSideBarOpen } = useLayout();
 
@@ -28,11 +25,7 @@ const SideBar = () => {
       } h-screen border-r-[3px] border-[#2C363F] flex flex-col`}
     >
       {isVideoOverlayOpen && <VideoOverlay />}
-      {/* {isImageOverlayOpen && <ImageOverlay />} */}
-      {/* Images Section */}
-      {/* <ImageSection /> */}
-      {/* Videos Section */}
-      <VideoSection />
+      <VideoSection videoInfo={videoResults} />
     </motion.div>
   );
 };
