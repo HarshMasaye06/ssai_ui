@@ -6,8 +6,6 @@ import { CgClose } from "react-icons/cg";
 const VideoOverlay = () => {
   const { videoOverlayData, closeMiniPlayer } = useOverlay();
 
-  const video_id = "HinL5jCy_oI"
-
   return (
     <div className="absolute inset-0 bg-black/20 backdrop-blur-sm z-50 flex items-center justify-center">
       <motion.div
@@ -28,7 +26,7 @@ const VideoOverlay = () => {
         <header className=" h-[5%] flex justify-evenly ">
           <div className=" bg-yellow-100 w-[95%] mt-[3px] outline outline-[3px] outline-[#2C363F] px-2 flex items-center rounded-sm ">
             <span className=" ">
-              http://localhost:3000/video/{videoOverlayData.title}
+              {videoOverlayData.url}
             </span>
           </div>
           <div className=" w-[4%] relative">
@@ -51,7 +49,7 @@ const VideoOverlay = () => {
               <iframe
                 height={500}
                 width={1000}
-                src={`https://www.youtube.com/embed/${video_id}`}
+                src={`https://www.youtube.com/embed/${videoOverlayData.id}`}
                 allowFullScreen
                 className=" rounded-[0.3rem] "
               />

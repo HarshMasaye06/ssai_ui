@@ -55,17 +55,19 @@ export default function Home() {
 
       // Text search handling
       if (result && Array.isArray(result)) {
+
         const responses = result.map((item) => ({
           type: "answer",
-          content: item.content,
-          links: [item.links],
+          content: item?.content || '',
+          links: [item?.links],
         }));
+
+
         responses.forEach((response) => addMessage(response));
       }
 
-      // Video handling
-      if (videoResult && Array.isArray(videoResult)) {
-        setVideoResults(videoResult); // ← store videos for sidebar
+      if (videoResult?.videos && Array.isArray(videoResult?.videos)) {
+        setVideoResults(videoResult.videos); // ← store videos for sidebar
       }
     } catch (error) {
       addMessage({
