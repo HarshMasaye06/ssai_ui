@@ -30,15 +30,6 @@ export default function Home() {
   const [query, setQuery] = useState("");
   const [videoResults, setVideoResults] = useState([]);
 
-
-  function generateRandomLorem() {
-    const lorem =
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-    const words = lorem.split(" ");
-    const wordCount = Math.floor(Math.random() * (50 - 10 + 1)) + 10;
-    return words.slice(0, wordCount).join(" ");
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!query.trim()) return;
@@ -55,13 +46,11 @@ export default function Home() {
 
       // Text search handling
       if (result && Array.isArray(result)) {
-
         const responses = result.map((item) => ({
           type: "answer",
-          content: item?.content || '',
+          content: item?.content || "",
           links: [item?.links],
         }));
-
 
         responses.forEach((response) => addMessage(response));
       }

@@ -8,9 +8,6 @@ import { VscSend } from "react-icons/vsc";
 const InputBar = ({ query, setQuery, handleSubmit }) => {
   const { editMode, toggleEditMode } = useLayout();
 
-
-  
-
   return (
     <footer
       className={` ${
@@ -19,7 +16,7 @@ const InputBar = ({ query, setQuery, handleSubmit }) => {
     >
       <form
         className="max-w-3xl mx-auto"
-        onSubmit={async(e) => {
+        onSubmit={async (e) => {
           handleSubmit(e);
         }}
       >

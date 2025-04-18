@@ -38,7 +38,7 @@ const VideoSection = ({ videosInfo = [] }) => {
               whileTap={{ scale: 0.98 }}
               onClick={() => openMiniPlayer(item)}
               key={index}
-              className="bg-[#FFE66D] border-[3px] h-[10rem] hover:z-10 border-[#2C363F] rounded-lg flex items-center justify-center neubrutalism-shadow overflow-hidden"
+              className="bg-[#FFE66D] border-[3px] h-[10rem] hover:z-10 border-[#2C363F] rounded-lg flex items-center justify-center overflow-hidden"
             >
               {videoId ? (
                 <img
