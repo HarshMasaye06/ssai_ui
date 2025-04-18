@@ -20,7 +20,7 @@ const VideoSection = ({ videosInfo = [] }) => {
   useEffect(() => {
     try {
     } catch (error) {
-      console.log(error);
+
     }
   }, [videosInfo]);
 

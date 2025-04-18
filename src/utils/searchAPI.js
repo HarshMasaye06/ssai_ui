@@ -1,7 +1,9 @@
 export async function searchAPI(query) {
+  
+
   try {
     const response = await fetch(
-      "https://smart-source-ai-backend.onrender.com/api/v1/search/",
+      `${process.env.NEXT_PUBLIC_API_URL}/search`,
       {
         method: "POST",
         headers: {
@@ -17,15 +19,15 @@ export async function searchAPI(query) {
     }
 
     const data = await response.json();
-    // console.log("Query:", data.query);
-    // console.log("Links:", data.links);
-    // console.log("Answers:", data.answers);
+    // 
+    // 
+    // 
     const answers = data.answers.map((answer, index) => ({
       type: "answer",
       content: answer,
-      links: data.links[index] || [],
+      links: data.links[index] || '',
     }));
-    console.log("Processed Answers:", answers);
+    
     return answers;
   } catch (error) {
     console.error("API call failed:", error);

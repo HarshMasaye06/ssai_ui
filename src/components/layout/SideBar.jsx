@@ -10,6 +10,7 @@ const SideBar = ({ videoResults }) => {
   const { isVideoOverlayOpen, isImageOverlayOpen } = useOverlay();
   const { isSideBarOpen } = useLayout();
 
+
   return (
     <motion.div
       initial={{ width: "22vw", scaleX: 1 }}
@@ -25,7 +26,7 @@ const SideBar = ({ videoResults }) => {
       } h-screen border-r-[3px] border-[#2C363F] flex flex-col`}
     >
       {isVideoOverlayOpen && <VideoOverlay />}
-      <VideoSection videoInfo={videoResults} />
+      <VideoSection videosInfo={videoResults} />
     </motion.div>
   );
 };

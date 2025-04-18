@@ -37,7 +37,7 @@ const MessageBox = ({ message, i, m_len, isTyping, displayedText }) => {
             {/* Message Links */}
             <div className=" w-[90%] flex gap-1">
               {message.links.map((link, j) => (
-                <motion.a
+                link && <motion.a
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   key={j}
