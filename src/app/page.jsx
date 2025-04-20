@@ -3,7 +3,6 @@
 import Image from "next/image";
 import InputBar from "@/components/layout/InputBar";
 import { useEffect, useState } from "react";
-import { useTypewriter } from "@/hooks/useTypewriter";
 import Header from "@/components/layout/Header";
 import SideBar from "@/components/layout/SideBar";
 import { motion } from "framer-motion";
@@ -22,11 +21,6 @@ export default function Home() {
   const { messages, isLoading, addMessage, setLoading } = useMessages();
   const { editMode } = useLayout();
 
-  const { displayedText, isTyping } = useTypewriter(
-    messages[messages.length - 1]?.content || "",
-    150
-  );
-
   const [query, setQuery] = useState("");
   const [videoResults, setVideoResults] = useState([]);
 
@@ -44,7 +38,6 @@ export default function Home() {
         youtubeSearchAPI(query),
       ]);
 
-      // Text search handling
       if (result && Array.isArray(result)) {
         const responses = result.map((item) => ({
           type: "answer",
@@ -56,7 +49,7 @@ export default function Home() {
       }
 
       if (videoResult?.videos && Array.isArray(videoResult?.videos)) {
-        setVideoResults(videoResult.videos); // ← store videos for sidebar
+        setVideoResults(videoResult.videos);
       }
     } catch (error) {
       addMessage({
@@ -93,13 +86,10 @@ export default function Home() {
                   message={message}
                   i={i}
                   m_len={m_len}
-                  isTyping={isTyping}
-                  displayedText={displayedText}
                 />
               </motion.div>
             );
           })}
-          {/* </div> */}
         </section>
         <InputBar
           query={query}
