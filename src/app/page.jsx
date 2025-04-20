@@ -65,7 +65,7 @@ export default function Home() {
   return (
     <div className="flex h-screen w-screen bg-[#F5F5F5]">
       {isLoading && <LoadingScreen />}
-      <SideBar videoResults={videoResults} />
+      {videoResults.length !== 0 && <SideBar videoResults={videoResults} />}
       <div className="flex flex-col w-full">
         <Header />
         <section
@@ -82,11 +82,7 @@ export default function Home() {
                   editMode ? "max-w-[30vw] z-50 " : " max-w-[45vw] "
                 }  ${message.type === "question" && "ml-auto"}`}
               >
-                <MessageBox
-                  message={message}
-                  i={i}
-                  m_len={m_len}
-                />
+                <MessageBox message={message} i={i} m_len={m_len} />
               </motion.div>
             );
           })}
